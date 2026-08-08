@@ -8,9 +8,16 @@
 </head>
 <body class="bg-slate-100 min-h-screen p-4 md:p-8 text-slate-800">
 
-  <header class="max-w-6xl mx-auto bg-indigo-600 text-white rounded-2xl p-6 mb-6 shadow-lg text-center relative">
-    <h1 class="text-2xl font-bold">🍊 도쿠시마 여행 플래너</h1>
-    <p class="text-sm text-indigo-200 mt-2">2026.08.20 (목) ~ 08.23 (일)</p>
+  <header class="max-w-6xl mx-auto bg-indigo-600 text-white rounded-2xl p-6 mb-6 shadow-lg relative flex flex-col md:flex-row justify-between items-center gap-4">
+    <div class="text-center md:text-left">
+      <h1 class="text-2xl font-bold">🍊 도쿠시마 여행 플래너</h1>
+      <p class="text-sm text-indigo-200 mt-2">2026.08.20 (목) ~ 08.23 (일)</p>
+    </div>
+    <!-- 공유하기 버튼 추가 -->
+    <button onclick="shareItinerary()" class="bg-white text-indigo-700 font-bold px-4 py-2.5 rounded-xl shadow-sm hover:bg-indigo-50 transition flex items-center gap-2 text-sm w-full md:w-auto justify-center">
+      <span>🔗</span>
+      <span>엄마에게 일정 링크 보내기 (복사)</span>
+    </button>
   </header>
 
   <div class="max-w-6xl mx-auto flex flex-col lg:flex-row gap-6">
@@ -42,7 +49,7 @@
 
       <button onclick="openGoogleMapsRoute()" class="hidden lg:flex w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-2xl shadow-md transition items-center justify-center gap-2">
         <span class="text-xl">🗺️</span>
-        <span>구글 맵 최적 경로 생성</span>
+        <span>구글 맵 최적 경로 생성 (공유용)</span>
       </button>
     </aside>
 
@@ -52,7 +59,7 @@
       <!-- 최신 정보가 반영된 추천 명소 카드형 UI -->
       <section class="bg-white rounded-2xl p-5 shadow-sm border-t-4 border-amber-400">
         <h2 class="text-base font-bold text-slate-700 mb-4 flex items-center gap-2">
-          <span>✨</span> 도쿠시마 추천 스팟 (최신 근황 반영)
+          <span>✨</span> 도쿠시마 추천 스팟
         </h2>
         
         <!-- 카드 그리드 -->
@@ -65,8 +72,8 @@
               <button onclick="addSpot('미마시 우다쓰 거리')" class="bg-emerald-600 text-white text-[11px] px-3 py-1 rounded-lg hover:bg-emerald-700 shrink-0">+ 추가</button>
             </div>
             <ul class="text-[11px] text-slate-700 space-y-1 list-disc pl-4">
-              <li><span class="font-semibold text-rose-500">휴무:</span> 거리는 무휴 (단, 카페/상점은 수요일 휴무 및 17시 마감이 많음)</li>
-              <li><span class="font-semibold text-amber-600">주의:</span> 에도 시대 감성 물씬! 단, 도쿠시마역에서 기차(아나부키역 하차)+택시/버스로 이동해야 하니 반나절 정도 여유롭게 일정을 잡으세요.</li>
+              <li><span class="font-semibold text-rose-500">휴무:</span> 거리는 무휴 (카페/상점 수요일 휴무 및 17시 마감 많음)</li>
+              <li><span class="font-semibold text-amber-600">주의:</span> 에도 시대 감성! 도쿠시마역에서 기차(아나부키역)+택시/버스로 이동. 반나절 일정 권장.</li>
             </ul>
           </div>
 
@@ -77,8 +84,8 @@
               <button onclick="addSpot('오츠카 국제미술관')" class="bg-indigo-600 text-white text-[11px] px-3 py-1 rounded-lg hover:bg-indigo-700 shrink-0">+ 추가</button>
             </div>
             <ul class="text-[11px] text-slate-600 space-y-1 list-disc pl-4">
-              <li><span class="font-semibold text-rose-500">휴무:</span> 월요일 (목~일 일정이라 문제없음!)</li>
-              <li><span class="font-semibold text-amber-600">주의:</span> 세계 최대 규모. 관람에 최소 3~4시간 소요되니 무조건 편한 운동화 필수.</li>
+              <li><span class="font-semibold text-rose-500">휴무:</span> 월요일</li>
+              <li><span class="font-semibold text-amber-600">주의:</span> 세계 최대 규모. 관람 최소 3~4시간 소요. 편한 운동화 필수.</li>
             </ul>
           </div>
 
@@ -89,8 +96,8 @@
               <button onclick="addSpot('나루토 회오리 우즈노미치')" class="bg-indigo-600 text-white text-[11px] px-3 py-1 rounded-lg hover:bg-indigo-700 shrink-0">+ 추가</button>
             </div>
             <ul class="text-[11px] text-slate-600 space-y-1 list-disc pl-4">
-              <li><span class="font-semibold text-rose-500">휴무:</span> 없음 (우즈노미치는 3,6,9,12월 둘째 월요일 휴무)</li>
-              <li><span class="font-semibold text-amber-600">주의:</span> 방문 전 반드시 당일의 '만조/간조' 시간표 확인 필수. 시간 안 맞으면 회오리가 안 보임.</li>
+              <li><span class="font-semibold text-rose-500">휴무:</span> 없음 (우즈노미치는 3,6,9,12월 둘째 월 휴무)</li>
+              <li><span class="font-semibold text-amber-600">주의:</span> 방문 전 반드시 '만조/간조' 시간표 확인 필수.</li>
             </ul>
           </div>
 
@@ -102,7 +109,7 @@
             </div>
             <ul class="text-[11px] text-slate-600 space-y-1 list-disc pl-4">
               <li><span class="font-semibold text-rose-500">위치:</span> 아와오도리 회관 1층</li>
-              <li><span class="font-semibold text-emerald-600">특징:</span> 스다치(영귤) 소스, 쪽염색(아이조메) 파우치 등 도쿠시마 로컬 특산품/소품 총집합.</li>
+              <li><span class="font-semibold text-emerald-600">특징:</span> 스다치 소스, 쪽염색 등 로컬 특산품 총집합.</li>
             </ul>
           </div>
 
@@ -114,7 +121,7 @@
             </div>
             <ul class="text-[11px] text-slate-600 space-y-1 list-disc pl-4">
               <li><span class="font-semibold text-rose-500">위치:</span> 도쿠시마역 클레멘트 플라자 주변</li>
-              <li><span class="font-semibold text-emerald-600">특징:</span> 서브컬처 중심지. 캐릭터 소품, 피규어, 트레이딩 카드, 이치방쿠지(제일복권) 매장 등 구경 추천.</li>
+              <li><span class="font-semibold text-emerald-600">특징:</span> 캐릭터 소품, 피규어, 이치방쿠지 등 구경 추천.</li>
             </ul>
           </div>
 
@@ -126,7 +133,7 @@
             </div>
             <ul class="text-[11px] text-slate-600 space-y-1 list-disc pl-4">
               <li><span class="font-semibold text-rose-500">휴무:</span> 무휴 (악천후 시 통제)</li>
-              <li><span class="font-semibold text-amber-600">주의:</span> 바닥 나무 틈이 넓어 하이힐/슬리퍼 절대 금지. 대중교통 배차 간격이 매우 길어 시간 계산 주의.</li>
+              <li><span class="font-semibold text-amber-600">주의:</span> 하이힐/슬리퍼 금지. 버스 배차 간격 주의.</li>
             </ul>
           </div>
 
@@ -138,7 +145,7 @@
             </div>
             <ul class="text-[11px] text-slate-600 space-y-1 list-disc pl-4">
               <li><span class="font-semibold text-rose-500">휴무:</span> 화요일/수요일</li>
-              <li><span class="font-semibold text-amber-600">특징:</span> 귀멸의 칼날 제작사로 유명한 유포테이블이 운영. 한정판 굿즈와 테마 카페 경험 가능.</li>
+              <li><span class="font-semibold text-amber-600">특징:</span> 귀멸의 칼날 제작사 운영. 굿즈와 테마 카페.</li>
             </ul>
           </div>
 
@@ -172,15 +179,73 @@
       <!-- 모바일용 버튼 -->
       <button onclick="openGoogleMapsRoute()" class="lg:hidden w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-2xl shadow-md transition flex items-center justify-center gap-2 mb-10">
         <span class="text-xl">🗺️</span>
-        <span>구글 맵 최적 경로 생성</span>
+        <span>구글 맵 최적 경로 생성 (공유용)</span>
       </button>
 
     </main>
   </div>
 
   <script>
-    let spots = JSON.parse(localStorage.getItem('tokushima_spots')) || [];
-    let travelInfo = JSON.parse(localStorage.getItem('tokushima_info')) || { flightOut: '', flightIn: '', hotel: '' };
+    let spots = [];
+    let travelInfo = { flightOut: '', flightIn: '', hotel: '' };
+
+    // 1. 공유 링크 파싱 및 초기 데이터 로드
+    function loadInitialData() {
+      // URL에 '?share=' 파라미터가 있는지 확인 (어머니가 링크를 누르고 들어온 경우)
+      const urlParams = new URLSearchParams(window.location.search);
+      const shareData = urlParams.get('share');
+      
+      if (shareData) {
+        try {
+          // 암호화된 데이터를 복호화하여 저장
+          const decoded = JSON.parse(decodeURIComponent(atob(shareData)));
+          travelInfo = decoded.travelInfo || { flightOut: '', flightIn: '', hotel: '' };
+          spots = decoded.spots || [];
+          
+          // 로컬 스토리지에 덮어쓰기 (새로고침해도 유지되도록)
+          saveSpots();
+          saveInfo(true);
+          
+          // 주소창을 깔끔하게 정리 (share 파라미터 숨김)
+          window.history.replaceState({}, document.title, window.location.pathname);
+          alert('어머니 환영합니다! 공유받은 여행 일정을 성공적으로 불러왔습니다. 🎉\n\n하단의 [구글 맵 생성] 버튼을 누르면 지도가 뜹니다.');
+        } catch (e) {
+          console.error('공유 데이터 로드 실패', e);
+          loadFromLocal();
+        }
+      } else {
+        // 일반 접속일 경우 로컬 스토리지에서 로드
+        loadFromLocal();
+      }
+      initUI();
+    }
+
+    function loadFromLocal() {
+      spots = JSON.parse(localStorage.getItem('tokushima_spots')) || [];
+      travelInfo = JSON.parse(localStorage.getItem('tokushima_info')) || { flightOut: '', flightIn: '', hotel: '' };
+    }
+
+    // 2. 일정 공유 링크 생성 함수
+    function shareItinerary() {
+      const dataToShare = {
+        travelInfo: travelInfo,
+        spots: spots
+      };
+      
+      // 데이터를 문자열로 변환 후 안전하게 인코딩 (Base64)
+      const encodedData = btoa(encodeURIComponent(JSON.stringify(dataToShare)));
+      
+      // 현재 주소 뒤에 파라미터 붙이기
+      const shareUrl = window.location.origin + window.location.pathname + '?share=' + encodedData;
+      
+      // 클립보드에 복사
+      navigator.clipboard.writeText(shareUrl).then(() => {
+        alert('✅ 어머니께 보낼 일정 공유 링크가 복사되었습니다!\n\n카카오톡 등에 붙여넣기 해주세요.');
+      }).catch(err => {
+        // 복사 실패 시 수동 복사 지원용 프롬프트
+        prompt('아래 링크를 복사하여 카카오톡으로 보내주세요:', shareUrl);
+      });
+    }
 
     function initUI() {
       document.getElementById('flightOut').value = travelInfo.flightOut;
@@ -189,13 +254,13 @@
       renderSpots();
     }
 
-    function saveInfo() {
+    function saveInfo(skipSaveToLocal = false) {
       travelInfo = {
         flightOut: document.getElementById('flightOut').value,
         flightIn: document.getElementById('flightIn').value,
         hotel: document.getElementById('hotelInfo').value
       };
-      localStorage.setItem('tokushima_info', JSON.stringify(travelInfo));
+      if(!skipSaveToLocal) localStorage.setItem('tokushima_info', JSON.stringify(travelInfo));
     }
 
     function renderSpots() {
@@ -299,7 +364,8 @@
       window.open(mapsUrl, '_blank');
     }
 
-    initUI();
+    // 앱 구동 시 데이터 로드 함수 실행
+    loadInitialData();
   </script>
 </body>
 </html>
