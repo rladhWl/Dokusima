@@ -1,9 +1,10 @@
+제목 텍스트를 도쿠시마 여행 플레너로 변경하고, 공유 버튼 문구를 일정 링크 보내기 (복사) 및 안내 메시지까지 깔끔하게 수정한 완성본 코드입니다.
 <!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>도쿠시마 2박 3일 여행 플래너 (뚜벅이 & 로컬 가이드)</title>
+  <title>도쿠시마 여행 플레너</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-slate-100 min-h-screen p-4 md:p-8 text-slate-800">
@@ -11,25 +12,25 @@
   <!-- 헤더 영역 -->
   <header class="max-w-6xl mx-auto bg-indigo-600 text-white rounded-2xl p-6 mb-4 shadow-lg relative flex flex-col md:flex-row justify-between items-center gap-4">
     <div class="text-center md:text-left">
-      <h1 class="text-2xl font-bold">🍊 도쿠시마 뚜벅이 여행 플래너</h1>
-      <p class="text-sm text-indigo-200 mt-1">2026.08.20 (목) ~ 08.23 (일) | 대중교통 100% & 로컬 공예 가이드</p>
+      <h1 class="text-2xl font-bold">🍊 도쿠시마 여행 플레너</h1>
+      <p class="text-sm text-indigo-200 mt-1">2026.08.19 (수) ~ 08.21 (금) | 2박 3일 (대중교통 100%)</p>
     </div>
     <button onclick="shareItinerary()" class="bg-white text-indigo-700 font-bold px-4 py-2.5 rounded-xl shadow-sm hover:bg-indigo-50 transition flex items-center gap-2 text-sm w-full md:w-auto justify-center">
       <span>🔗</span>
-      <span>엄마에게 일정 링크 보내기 (복사)</span>
+      <span>일정 링크 보내기 (복사)</span>
     </button>
   </header>
 
-  <!-- 꿀팁: 한국인 전용 도쿠시마 현지 혜택 안내 배너 -->
+  <!-- 한국인 전용 도쿠시마 현지 혜택 안내 배너 -->
   <div class="max-w-6xl mx-auto mb-6 bg-gradient-to-r from-blue-600 to-indigo-700 text-white rounded-2xl p-4 md:p-5 shadow-md flex flex-col md:flex-row items-center justify-between gap-3 border border-blue-400">
     <div class="flex items-start gap-3">
       <span class="text-2xl mt-0.5">🇰🇷</span>
       <div>
         <div class="flex items-center gap-2">
-          <h3 class="font-bold text-sm md:text-base">한국인 여행자 필수 특전: 도쿠시마 버스 2일 무료 패스</h3>
-          <span class="bg-amber-400 text-slate-900 text-[10px] font-extrabold px-2 py-0.5 rounded-full">공항 필수 수령</span>
+          <h3 class="font-bold text-sm md:text-base">이스타항공 승객 필수: 도쿠시마 버스 2일 무료 프리패스</h3>
+          <span class="bg-amber-400 text-slate-900 text-[10px] font-extrabold px-2 py-0.5 rounded-full">공항 1층 수령</span>
         </div>
-        <p class="text-xs text-blue-100 mt-1">도쿠시마 공항 1층 인포메이션에서 <strong>여권 + 한국발 항공권(모바일 탑승권 가능)</strong>을 제시하면, 시내버스 및 공항 리무진 버스를 무제한 탈 수 있는 <strong>2일 버스 프리패스</strong>를 무료로 배포합니다.</p>
+        <p class="text-xs text-blue-100 mt-1">도쿠시마 공항 도착 후 1층 관광안내소에서 <strong>여권 + 이스타항공(ZE671) 탑승권</strong>을 제시하면 시내버스 및 공항 리무진을 무제한 탈 수 있는 <strong>2일 무료 패스</strong>를 수령할 수 있습니다.</p>
       </div>
     </div>
     <button onclick="addSpot('도쿠시마 공항 1F 안내소 (무료 버스패스 수령)')" class="bg-white text-blue-800 text-xs font-bold px-3.5 py-2 rounded-xl shrink-0 hover:bg-blue-50 transition shadow-sm">
@@ -39,31 +40,33 @@
 
   <div class="max-w-6xl mx-auto flex flex-col lg:flex-row gap-6">
 
-    <!-- 왼쪽 사이드바 (기본 정보 + 노렌터카 교통 안내) -->
+    <!-- 왼쪽 사이드바 (확정된 항공편 & 호텔 고정 정보) -->
     <aside class="w-full lg:w-1/3 flex flex-col gap-4">
       
       <!-- 항공편 & 숙소 정보 -->
       <section class="bg-white rounded-2xl p-5 shadow-sm border border-indigo-100">
         <div class="mb-4 border-b pb-2">
           <h2 class="text-base font-bold text-slate-700 flex items-center gap-2">
-            <span>✈️</span> 여행 기본 정보
+            <span>✈️</span> 확정된 여행 정보
           </h2>
         </div>
         <div class="space-y-3">
           <div>
-            <label class="block text-xs font-bold text-slate-500 mb-1">출국 비행기</label>
-            <input type="text" id="flightOut" onblur="saveInfo()" placeholder="예: 8/20 09:00 출발" class="w-full border rounded-xl px-3 py-2 text-sm bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 transition">
+            <label class="block text-xs font-bold text-slate-500 mb-1">출국 항공편</label>
+            <input type="text" id="flightOut" onblur="saveInfo()" value="8/19 이스타항공 ZE671 (인천 13:45 ➔ 도쿠시마 15:30)" class="w-full border rounded-xl px-3 py-2 text-xs md:text-sm bg-slate-50 font-medium focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 transition">
           </div>
           <div>
-            <label class="block text-xs font-bold text-slate-500 mb-1">귀국 비행기</label>
-            <input type="text" id="flightIn" onblur="saveInfo()" placeholder="예: 8/23 18:30 출발" class="w-full border rounded-xl px-3 py-2 text-sm bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 transition">
+            <label class="block text-xs font-bold text-slate-500 mb-1">귀국 항공편</label>
+            <input type="text" id="flightIn" onblur="saveInfo()" value="8/21 이스타항공 ZE672 (도쿠시마 16:40 ➔ 인천 18:20)" class="w-full border rounded-xl px-3 py-2 text-xs md:text-sm bg-slate-50 font-medium focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 transition">
           </div>
           <div>
-            <label class="block text-xs font-bold text-slate-500 mb-1">숙소 (베이스캠프: JR도쿠시마역 인근 추천)</label>
-            <input type="text" id="hotelInfo" onblur="saveInfo()" placeholder="예: JR 호텔 클레멘트 도쿠시마" class="w-full border rounded-xl px-3 py-2 text-sm bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 transition">
+            <label class="block text-xs font-bold text-slate-500 mb-1">숙소 (고정 베이스캠프)</label>
+            <input type="text" id="hotelInfo" onblur="saveInfo()" value="도쿠시마 워싱턴 플라자 호텔" class="w-full border rounded-xl px-3 py-2 text-sm bg-slate-50 font-medium text-indigo-700 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 transition">
           </div>
         </div>
-        <p class="text-[11px] text-slate-400 mt-2 text-right">* 입력 후 바탕을 누르면 자동 저장</p>
+        <div class="text-[11px] text-slate-500 mt-3 pt-2 border-t space-y-1">
+          <p>🏨 <strong>호텔 위치 팁:</strong> 도쿠시마역 도보 10분, 아와오도리 회관 도보 5분 거리의 중심 번화가 위치.</p>
+        </div>
       </section>
 
       <!-- 구글 맵 대중교통 경로 생성 버튼 (PC용) -->
@@ -72,13 +75,13 @@
         <span>구글 맵 대중교통 최적 경로 생성</span>
       </button>
 
-      <!-- 뚜벅이 교통 팁 -->
+      <!-- 시간대별 뚜벅이 이동 팁 -->
       <section class="bg-amber-50 rounded-2xl p-4 border border-amber-200 shadow-sm text-xs space-y-2">
         <h3 class="font-bold text-amber-800 flex items-center gap-1.5 text-sm">
-          <span>🚌</span> 뚜벅이 대중교통 이용 팁
+          <span>🕒</span> 비행 스케줄 최적화 팁
         </h3>
-        <p class="text-amber-900 leading-relaxed">• <strong>나루토 방면:</strong> 도쿠시마역 앞 1번 승강장 버스로 환승 없이 직행 이동.</p>
-        <p class="text-amber-900 leading-relaxed">• <strong>이야 계곡:</strong> JR 도쿠시마선 특급을 타고 아와이케다/오보케역으로 간 뒤 버스 연계.</p>
+        <p class="text-amber-900 leading-relaxed">• <strong>1일 차(15:30 도착):</strong> 입국 수속 후 공항 리무진을 타고 호텔 체크인(17시경) ➔ 저녁 식사 및 비잔 야경/아와오도리 회관 관람 추천.</p>
+        <p class="text-amber-900 leading-relaxed">• <strong>3일 차(16:40 출발):</strong> 14:30~15:00까지 도쿠시마역에서 공항 리무진 탑승(약 30분 소요)하면 여유롭게 출국 가능.</p>
       </section>
 
     </aside>
@@ -91,7 +94,7 @@
         <h2 class="text-base font-bold text-slate-700 mb-2 flex items-center gap-2">
           <span>🎯</span> 목적별 2박 3일 추천 동선 프리셋
         </h2>
-        <p class="text-xs text-slate-500 mb-3">테마를 클릭하면 차 없이도 이동 가능한 최적 장소들이 내 여행 동선에 자동 반영됩니다.</p>
+        <p class="text-xs text-slate-500 mb-3">오후 도착(15:30) 및 늦은 오후 귀국(16:40)에 맞춘 뚜벅이 최적 코스입니다.</p>
         
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2">
           <button onclick="loadPreset('gourmet')" class="bg-rose-50 hover:bg-rose-100 border border-rose-200 text-rose-700 p-2.5 rounded-xl text-xs font-bold transition flex flex-col items-center gap-1">
@@ -112,7 +115,7 @@
         </div>
       </section>
 
-      <!-- 3가지 서브 탭 전환: [추천 명소] / [일본 현지인 단골 소품&공예샵] / [특산품 도감] -->
+      <!-- 3가지 서브 탭 전환 -->
       <div class="flex bg-slate-200 p-1 rounded-xl">
         <button id="tabSpotsBtn" onclick="switchView('spots')" class="flex-1 py-2 text-xs md:text-sm font-bold rounded-lg bg-white shadow-sm text-indigo-600 transition">📍 핵심 명소</button>
         <button id="tabLocalCraftBtn" onclick="switchView('localCraft')" class="flex-1 py-2 text-xs md:text-sm font-bold rounded-lg text-slate-600 hover:text-slate-900 transition">🏮 현지인 소품/공예샵</button>
@@ -134,8 +137,8 @@
                 <button onclick="addSpot('오츠카 국제미술관')" class="bg-indigo-600 text-white text-[11px] px-3 py-1 rounded-lg hover:bg-indigo-700 shrink-0">+ 추가</button>
               </div>
               <ul class="text-[11px] text-slate-600 space-y-1 list-disc pl-4">
-                <li><span class="font-semibold text-rose-500">휴무:</span> 월요일 (관람 최소 3시간 소요)</li>
-                <li><span class="font-semibold text-blue-600">교통:</span> JR도쿠시마역 앞 1번 버스 정류장에서 나루토선 직행 버스 탑승 (약 50분).</li>
+                <li><span class="font-semibold text-rose-500">휴무:</span> 월요일 (2일 차 전일 일정 추천)</li>
+                <li><span class="font-semibold text-blue-600">교통:</span> 도쿠시마역 앞 1번 승강장에서 나루토선 직행 버스 (무료 패스 사용 가능, 약 50분).</li>
               </ul>
             </div>
 
@@ -146,7 +149,7 @@
               </div>
               <ul class="text-[11px] text-slate-600 space-y-1 list-disc pl-4">
                 <li><span class="font-semibold text-rose-500">주의:</span> 방문 당일 만조/간조 조수 시간표 체크 필수</li>
-                <li><span class="font-semibold text-blue-600">교통:</span> 오츠카 미술관에서 버스로 5분, 나루토 공원 종점 하차.</li>
+                <li><span class="font-semibold text-blue-600">교통:</span> 오츠카 미술관에서 로컬 버스로 약 5분 (나루토 공원 종점).</li>
               </ul>
             </div>
 
@@ -156,30 +159,8 @@
                 <button onclick="addSpot('아와오도리 회관')" class="bg-indigo-600 text-white text-[11px] px-3 py-1 rounded-lg hover:bg-indigo-700 shrink-0">+ 추가</button>
               </div>
               <ul class="text-[11px] text-slate-600 space-y-1 list-disc pl-4">
-                <li><span class="font-semibold text-emerald-600">특징:</span> 5층 비잔 로프웨이 탑승장 연결 (야경 조망)</li>
-                <li><span class="font-semibold text-blue-600">교통:</span> JR 도쿠시마역에서 도보 10분 직진.</li>
-              </ul>
-            </div>
-
-            <div class="border rounded-xl p-3 hover:shadow-md transition bg-emerald-50 border-emerald-200">
-              <div class="flex justify-between items-start mb-1.5">
-                <h3 class="font-bold text-sm text-emerald-800">미마시 우다쓰 거리 (전통 가옥)</h3>
-                <button onclick="addSpot('미마시 우다쓰 거리')" class="bg-emerald-600 text-white text-[11px] px-3 py-1 rounded-lg hover:bg-emerald-700 shrink-0">+ 추가</button>
-              </div>
-              <ul class="text-[11px] text-slate-700 space-y-1 list-disc pl-4">
-                <li><span class="font-semibold text-rose-500">안내:</span> 에도 시대 천연 쪽(아이) 대상인들의 고택 보존지구</li>
-                <li><span class="font-semibold text-blue-600">교통:</span> JR도쿠시마역에서 JR도쿠시마선 열차로 아나부키(穴吹)역 이동 후 버스/택시 10분.</li>
-              </ul>
-            </div>
-
-            <div class="border rounded-xl p-3 hover:shadow-md transition bg-slate-50">
-              <div class="flex justify-between items-start mb-1.5">
-                <h3 class="font-bold text-sm text-indigo-700">이야 계곡 덩굴다리</h3>
-                <button onclick="addSpot('이야 계곡 덩굴다리')" class="bg-indigo-600 text-white text-[11px] px-3 py-1 rounded-lg hover:bg-indigo-700 shrink-0">+ 추가</button>
-              </div>
-              <ul class="text-[11px] text-slate-600 space-y-1 list-disc pl-4">
-                <li><span class="font-semibold text-rose-500">주의:</span> 천연 덩굴 현수교. 발 편한 운동화 필수</li>
-                <li><span class="font-semibold text-blue-600">교통:</span> JR 오보케(大歩危)역 하차 후 시코쿠코츠 버스 탑승(25분).</li>
+                <li><span class="font-semibold text-emerald-600">특징:</span> 호텔에서 도보 5분! 1일 차 저녁 로프웨이 야경 감상 추천</li>
+                <li><span class="font-semibold text-blue-600">위치:</span> 워싱턴 플라자 호텔 정문에서 직진 도보 5분.</li>
               </ul>
             </div>
 
@@ -189,8 +170,30 @@
                 <button onclick="addSpot('츄카소바 이노타니 본점')" class="bg-orange-500 text-white text-[11px] px-3 py-1 rounded-lg hover:bg-orange-600 shrink-0">+ 추가</button>
               </div>
               <ul class="text-[11px] text-slate-600 space-y-1 list-disc pl-4">
-                <li><span class="font-semibold text-amber-600">추천:</span> 진한 돈골 간장에 날계란과 밥을 곁들여 먹기</li>
-                <li><span class="font-semibold text-blue-600">교통:</span> JR 도쿠시마역에서 도보 12~15분.</li>
+                <li><span class="font-semibold text-amber-600">추천:</span> 도쿠시마 라멘 원조. 날계란과 밥을 꼭 추가할 것</li>
+                <li><span class="font-semibold text-blue-600">교통:</span> 호텔에서 도보 약 10분 거리.</li>
+              </ul>
+            </div>
+
+            <div class="border rounded-xl p-3 hover:shadow-md transition bg-emerald-50 border-emerald-200">
+              <div class="flex justify-between items-start mb-1.5">
+                <h3 class="font-bold text-sm text-emerald-800">미마시 우다쓰 거리 (전통 가옥)</h3>
+                <button onclick="addSpot('미마시 우다쓰 거리')" class="bg-emerald-600 text-white text-[11px] px-3 py-1 rounded-lg hover:bg-emerald-700 shrink-0">+ 추가</button>
+              </div>
+              <ul class="text-[11px] text-slate-700 space-y-1 list-disc pl-4">
+                <li><span class="font-semibold text-rose-500">안내:</span> 에도 시대 천연 쪽 무역 상인들의 고택 보존지구</li>
+                <li><span class="font-semibold text-blue-600">교통:</span> 도쿠시마역에서 JR도쿠시마선 열차로 아나부키역 이동 후 버스/택시 10분.</li>
+              </ul>
+            </div>
+
+            <div class="border rounded-xl p-3 hover:shadow-md transition bg-slate-50">
+              <div class="flex justify-between items-start mb-1.5">
+                <h3 class="font-bold text-sm text-indigo-700">이야 계곡 덩굴다리</h3>
+                <button onclick="addSpot('이야 계곡 덩굴다리')" class="bg-indigo-600 text-white text-[11px] px-3 py-1 rounded-lg hover:bg-indigo-700 shrink-0">+ 추가</button>
+              </div>
+              <ul class="text-[11px] text-slate-600 space-y-1 list-disc pl-4">
+                <li><span class="font-semibold text-rose-500">주의:</span> 발 편한 운동화 필수</li>
+                <li><span class="font-semibold text-blue-600">교통:</span> JR 도쿠시마선 특급 ➔ 오보케역 ➔ 시코쿠코츠 버스 환승(25분).</li>
               </ul>
             </div>
 
@@ -198,54 +201,50 @@
         </section>
       </div>
 
-      <!-- 2. 일본 현지 리뷰 기반 로컬 소품·공예 셀렉트숍 탭 (신규 추가) -->
+      <!-- 2. 일본 현지 리뷰 기반 로컬 소품·공예 셀렉트숍 탭 -->
       <div id="viewLocalCraft" class="hidden space-y-4">
         <section class="bg-white rounded-2xl p-5 shadow-sm border-t-4 border-teal-500">
           <h2 class="text-base font-bold text-slate-700 mb-1 flex items-center gap-2">
             <span>🏮</span> 일본 현지인이 찾는 로컬 소품 & 라이프스타일 샵
           </h2>
-          <p class="text-xs text-slate-500 mb-4">도쿠시마 현지 매거진(あわわ)과 일본 로컬 블로그 리뷰에서 찬사를 받는 공예·디자인 숍입니다.</p>
+          <p class="text-xs text-slate-500 mb-4">현지 잡지(あわわ) 및 일본인 블로그에서 고평가를 받는 감성 공예/디자인 샵입니다.</p>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[460px] overflow-y-auto pr-1 pb-2">
             
-            <!-- nagaya. -->
             <div class="border border-teal-200 bg-teal-50/40 p-3.5 rounded-xl hover:shadow-md transition">
               <div class="flex justify-between items-start mb-1">
                 <h3 class="font-bold text-xs text-teal-900">nagaya. (도쿠시마 오키하마)</h3>
                 <button onclick="addSpot('nagaya. (로컬 공예 잡화점)')" class="bg-teal-600 text-white text-[10px] px-2.5 py-1 rounded-lg hover:bg-teal-700 shrink-0">+ 추가</button>
               </div>
-              <p class="text-[11px] text-slate-700 leading-snug">시코쿠와 도쿠시마 작가들의 수제 식기, 목공예품, 오타니야키 도자기, 직물 소품을 정갈하게 큐레이션한 감성 갤러리 숍.</p>
-              <div class="text-[10px] text-teal-700 mt-2">📍 도쿠시마시 오키하마 (도쿠시마역에서 버스로 10분)</div>
+              <p class="text-[11px] text-slate-700 leading-snug">시코쿠와 도쿠시마 지역 작가들의 수제 목공예품, 오타니야키 도자기, 직물 소품을 큐레이션한 감성 갤러리 샵.</p>
+              <div class="text-[10px] text-teal-700 mt-2">📍 도쿠시마시 오키하마 (호텔/역 앞 버스 10분)</div>
             </div>
 
-            <!-- cue! -->
             <div class="border border-teal-200 bg-teal-50/40 p-3.5 rounded-xl hover:shadow-md transition">
               <div class="flex justify-between items-start mb-1">
-                <h3 class="font-bold text-xs text-teal-900">cue! (라이프스타일 숍)</h3>
+                <h3 class="font-bold text-xs text-teal-900">cue! (라이프스타일 셀렉트샵)</h3>
                 <button onclick="addSpot('cue! (감성 소품 편집숍)')" class="bg-teal-600 text-white text-[10px] px-2.5 py-1 rounded-lg hover:bg-teal-700 shrink-0">+ 추가</button>
               </div>
-              <p class="text-[11px] text-slate-700 leading-snug">현지 젊은 층과 크리에이터들이 애정하는 곳. 일본 국내 작가의 아기자기한 식기, 문구류, 패브릭, 오리지널 소품을 취급.</p>
+              <p class="text-[11px] text-slate-700 leading-snug">현지 젊은 층과 크리에이터들이 찾는 곳. 일본 국내 작가의 아기자기한 식기, 문구류, 패브릭 소품 판매.</p>
               <div class="text-[10px] text-teal-700 mt-2">📍 도쿠시마시 쇼와초 (도쿠시마역 앞 버스 8분)</div>
             </div>
 
-            <!-- 니치니치 잡화점 -->
             <div class="border border-teal-200 bg-teal-50/40 p-3.5 rounded-xl hover:shadow-md transition">
               <div class="flex justify-between items-start mb-1">
                 <h3 class="font-bold text-xs text-teal-900">니치니치 잡화점 (にちにち雑貨店)</h3>
                 <button onclick="addSpot('니치니치 잡화점 (나루토역 인근)')" class="bg-teal-600 text-white text-[10px] px-2.5 py-1 rounded-lg hover:bg-teal-700 shrink-0">+ 추가</button>
               </div>
-              <p class="text-[11px] text-slate-700 leading-snug">"도쿠시마의 좋은 것과 위트"를 모토로 한 숍. 시코쿠 지형 도자기 소품, 영귤 캐릭터 마스킹테이프, 나루토킨토키 잼 등 유니크한 굿즈 판매.</p>
-              <div class="text-[10px] text-teal-700 mt-2">📍 JR 나루토역에서 도보 5분</div>
+              <p class="text-[11px] text-slate-700 leading-snug">시코쿠 지형 디자인 도자기 소품, 영귤 캐릭터 마스킹테이프, 고구마 잼 등 유니크한 굿즈를 취급하는 감성 스팟.</p>
+              <div class="text-[10px] text-teal-700 mt-2">📍 JR 나루토역 도보 5분</div>
             </div>
 
-            <!-- 아이즈미초 역사관 쪽염색 공방 -->
             <div class="border border-teal-200 bg-teal-50/40 p-3.5 rounded-xl hover:shadow-md transition">
               <div class="flex justify-between items-start mb-1">
-                <h3 class="font-bold text-xs text-teal-900">아이노야카타 (藍の館 쪽염색 숍)</h3>
+                <h3 class="font-bold text-xs text-teal-900">아이노야카타 (藍の館 쪽염색 공방)</h3>
                 <button onclick="addSpot('아이즈미초 아이노야카타 (쪽염색)')" class="bg-teal-600 text-white text-[10px] px-2.5 py-1 rounded-lg hover:bg-teal-700 shrink-0">+ 추가</button>
               </div>
-              <p class="text-[11px] text-slate-700 leading-snug">에도시대 인디고 거상의 저택에서 직접 천연 쪽염색 손수건 체험(약 20분)을 하거나 장인의 스카프, 셔츠, 파우치 구매 가능.</p>
-              <div class="text-[10px] text-teal-700 mt-2">📍 도쿠시마역 앞 2번 승강장 버스 탑승 후 아이즈미초 하차</div>
+              <p class="text-[11px] text-slate-700 leading-snug">천연 쪽염색 손수건 체험(약 20분 소요) 및 장인의 스카프, 셔츠, 파우치 구매 가능.</p>
+              <div class="text-[10px] text-teal-700 mt-2">📍 도쿠시마역 2번 승강장 버스 탑승</div>
             </div>
 
           </div>
@@ -266,11 +265,11 @@
                 <span class="font-bold text-xs text-purple-900">아루데요 도쿠시마 (あるでよ徳島)</span>
                 <button onclick="addSpot('아루데요 도쿠시마 (기념품샵)')" class="text-[10px] bg-purple-600 text-white px-2 py-0.5 rounded hover:bg-purple-700">+ 동선 추가</button>
               </div>
-              <p class="text-[11px] text-slate-600">아와오도리 회관 1층. 도쿠시마현 전역의 특산품(김, 와산본, 과실주, 라멘 키트 등)을 망라한 최대 공식 숍.</p>
+              <p class="text-[11px] text-slate-600"><strong>호텔 도보 5분</strong> (아와오도리 회관 1층). 도쿠시마현 전역의 특산품(오노노리 김, 와산본, 과실주, 라멘 키트 등)을 망라한 최대 공식 숍.</p>
             </div>
             <div class="border border-purple-100 bg-purple-50/50 p-3 rounded-xl">
               <div class="flex justify-between items-center mb-1">
-                <span class="font-bold text-xs text-purple-900">도쿠시마 에키마에 클레멘트 플라자 B1F</span>
+                <span class="font-bold text-xs text-purple-900">도쿠시마 클레멘트 플라자 B1F</span>
                 <button onclick="addSpot('도쿠시마 클레멘트 플라자 지하 특산품관')" class="text-[10px] bg-purple-600 text-white px-2 py-0.5 rounded hover:bg-purple-700">+ 동선 추가</button>
               </div>
               <p class="text-[11px] text-slate-600">JR 도쿠시마역 지하 직결. 열차 타기 전 오노노리, 스다치 가공품, 사케를 한 번에 쇼핑하기에 최적.</p>
@@ -286,7 +285,7 @@
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs text-slate-700">
             <div class="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
               <div class="font-bold text-indigo-700 mb-0.5">🍘 오노노리 (大野海苔) 조미김</div>
-              <p class="text-[11px] text-slate-500">도쿠시마 국민 밥도둑. 일반 김보다 도톰하고 바삭하며 단짠 매콤한 양념이 특징.</p>
+              <p class="text-[11px] text-slate-500">도쿠시마 국민 밥도둑. 일반 김보다 도톰하고 바삭하며 단짠 매콤한 양념이 특징 (선물 1순위).</p>
             </div>
             <div class="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
               <div class="font-bold text-indigo-700 mb-0.5">🍠 나루토 킨토키 고구마 만주 / 타르트</div>
@@ -297,7 +296,7 @@
               <p class="text-[11px] text-slate-500">상큼한 영귤 과즙 소스. 나베, 생선구이, 샐러드 드레싱, 하이볼 베이스로 만능 활용.</p>
             </div>
             <div class="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
-              <div class="font-bold text-indigo-700 mb-0.5">🍶 스다치주 (すだち酒, 리큐르)</div>
+              <div class="font-bold text-indigo-700 mb-0.5">🍶 스다치주 (すだち酒, 과실주)</div>
               <p class="text-[11px] text-slate-500">영귤과 천연 꿀을 블렌딩한 상큼달콤한 과실주 (알코올 약 8도).</p>
             </div>
           </div>
@@ -310,7 +309,7 @@
           <span>📌</span> 가고 싶은 곳 직접 추가하기
         </h2>
         <div class="flex gap-2">
-          <input type="text" id="spotInput" placeholder="예: JR 도쿠시마역 앞 야키토리 이자카야" class="flex-1 border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          <input type="text" id="spotInput" placeholder="예: 호텔 근처 아와오도리 닭 야키토리집" class="flex-1 border rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
           <button onclick="addFromInput()" class="bg-indigo-600 text-white px-5 py-2.5 rounded-xl font-bold hover:bg-indigo-700 transition">추가</button>
         </div>
       </section>
@@ -338,41 +337,51 @@
   </div>
 
   <script>
-    let spots = [];
-    let travelInfo = { flightOut: '', flightIn: '', hotel: '' };
+    const DEFAULT_INFO = {
+      flightOut: '8/19 이스타항공 ZE671 (인천 13:45 ➔ 도쿠시마 15:30)',
+      flightIn: '8/21 이스타항공 ZE672 (도쿠시마 16:40 ➔ 인천 18:20)',
+      hotel: '도쿠시마 워싱턴 플라자 호텔'
+    };
 
-    // 5대 테마별 맞춤 동선 프리셋 데이터
+    let spots = [];
+    let travelInfo = { ...DEFAULT_INFO };
+
     const PRESETS = {
+      sightseeing: [
+        '도쿠시마 공항 1F 안내소 (무료 버스패스 수령)',
+        '도쿠시마 워싱턴 플라자 호텔 (체크인)',
+        '아와오도리 회관 (도보 5분)',
+        '비잔 산 로프웨이 전망대 (야경)',
+        '오츠카 국제미술관 (2일차 오전)',
+        '나루토 회오리 우즈노미치 (2일차 오후)',
+        '도쿠시마 클레멘트 플라자 (3일차 쇼핑)'
+      ],
       gourmet: [
         '도쿠시마 공항 1F 안내소 (무료 버스패스 수령)',
+        '도쿠시마 워싱턴 플라자 호텔',
         '츄카소바 이노타니 본점 (도쿠시마 라멘)',
         '나루토 해변 도미 요리 식당',
-        '도쿠시마역 주변 아와오도리 닭 야키토리 전문점',
-        '이야 소바 식당'
+        '아루데요 도쿠시마 (기념품샵)',
+        '도쿠시마역 주변 아와오도리 닭 야키토리 전문점'
       ],
       shopping: [
         '도쿠시마 공항 1F 안내소 (무료 버스패스 수령)',
-        '도쿠시마 클레멘트 플라자 지하 특산품관',
+        '도쿠시마 워싱턴 플라자 호텔',
         '아루데요 도쿠시마 (기념품샵)',
         'nagaya. (로컬 공예 잡화점)',
+        '도쿠시마 클레멘트 플라자 지하 특산품관',
         '아이즈미초 아이노야카타 (쪽염색)'
-      ],
-      sightseeing: [
-        '도쿠시마 공항 1F 안내소 (무료 버스패스 수령)',
-        '오츠카 국제미술관',
-        '나루토 회오리 우즈노미치',
-        '아와오도리 회관',
-        '비잔 산 로프웨이 전망대'
       ],
       nature: [
         '도쿠시마 공항 1F 안내소 (무료 버스패스 수령)',
-        '오보케 협곡 유람선 선착장',
-        '이야 계곡 덩굴다리',
-        '이야 온천 호텔',
+        '도쿠시마 워싱턴 플라자 호텔',
+        '오보케 협곡 유람선 선착장 (2일차)',
+        '이야 계곡 덩굴다리 (2일차)',
         '나루토 공원 센조지키 전망대'
       ],
       history: [
         '도쿠시마 공항 1F 안내소 (무료 버스패스 수령)',
+        '도쿠시마 워싱턴 플라자 호텔',
         '시코쿠 88개소 1번 사찰 료젠지',
         '미마시 우다쓰 거리',
         '도쿠시마성 박물관'
@@ -388,12 +397,10 @@
       const tabLocalCraftBtn = document.getElementById('tabLocalCraftBtn');
       const tabSouvenirsBtn = document.getElementById('tabSouvenirsBtn');
 
-      // 뷰 숨김 초기화
       viewSpots.classList.add('hidden');
       viewLocalCraft.classList.add('hidden');
       viewSouvenirs.classList.add('hidden');
 
-      // 탭 스타일 초기화
       const inactiveClass = 'flex-1 py-2 text-xs md:text-sm font-bold rounded-lg text-slate-600 hover:text-slate-900 transition';
       const activeClass = 'flex-1 py-2 text-xs md:text-sm font-bold rounded-lg bg-white shadow-sm text-indigo-600 transition';
 
@@ -431,12 +438,12 @@
       if (shareData) {
         try {
           const decoded = JSON.parse(decodeURIComponent(atob(shareData)));
-          travelInfo = decoded.travelInfo || { flightOut: '', flightIn: '', hotel: '' };
+          travelInfo = decoded.travelInfo || DEFAULT_INFO;
           spots = decoded.spots || [];
           saveSpots();
           saveInfo(true);
           window.history.replaceState({}, document.title, window.location.pathname);
-          alert('어머니 환영합니다! 공유받은 도쿠시마 여행 일정을 불러왔습니다. 🎉\n\n하단의 [구글 맵 대중교통 최적 경로 생성] 버튼을 누르면 대중교통 길찾기가 연동됩니다.');
+          alert('공유받은 도쿠시마 여행 일정을 성공적으로 불러왔습니다. 🎉\n\n하단의 [구글 맵 대중교통 최적 경로 생성] 버튼을 누르면 길찾기가 연동됩니다.');
         } catch (e) {
           console.error('공유 데이터 파싱 실패', e);
           loadFromLocal();
@@ -444,12 +451,19 @@
       } else {
         loadFromLocal();
       }
+
+      if (spots.length === 0) {
+        spots = [...PRESETS.sightseeing];
+        saveSpots();
+      }
+
       initUI();
     }
 
     function loadFromLocal() {
       spots = JSON.parse(localStorage.getItem('tokushima_spots')) || [];
-      travelInfo = JSON.parse(localStorage.getItem('tokushima_info')) || { flightOut: '', flightIn: '', hotel: '' };
+      const savedInfo = JSON.parse(localStorage.getItem('tokushima_info'));
+      travelInfo = savedInfo ? savedInfo : { ...DEFAULT_INFO };
     }
 
     function shareItinerary() {
@@ -458,16 +472,16 @@
       const shareUrl = window.location.origin + window.location.pathname + '?share=' + encodedData;
       
       navigator.clipboard.writeText(shareUrl).then(() => {
-        alert('✅ 어머니께 보낼 일정 공유 링크가 복사되었습니다!\n\n카카오톡에 붙여넣어 공유하세요.');
+        alert('✅ 일정 공유 링크가 복사되었습니다!\n\n카카오톡 등에 붙여넣어 공유하세요.');
       }).catch(() => {
-        prompt('아래 링크를 복사하여 카카오톡으로 보내주세요:', shareUrl);
+        prompt('아래 링크를 복사하여 공유해 주세요:', shareUrl);
       });
     }
 
     function initUI() {
-      document.getElementById('flightOut').value = travelInfo.flightOut || '';
-      document.getElementById('flightIn').value = travelInfo.flightIn || '';
-      document.getElementById('hotelInfo').value = travelInfo.hotel || '';
+      document.getElementById('flightOut').value = travelInfo.flightOut || DEFAULT_INFO.flightOut;
+      document.getElementById('flightIn').value = travelInfo.flightIn || DEFAULT_INFO.flightIn;
+      document.getElementById('hotelInfo').value = travelInfo.hotel || DEFAULT_INFO.hotel;
       renderSpots();
     }
 
@@ -545,41 +559,22 @@
     }
 
     function openGoogleMapsRoute() {
-      const hotel = travelInfo.hotel ? travelInfo.hotel.trim() : '';
+      const hotel = travelInfo.hotel ? travelInfo.hotel.trim() : '도쿠시마 워싱턴 플라자 호텔';
 
       if (spots.length === 0) {
-        if (hotel) {
-          if (confirm('등록된 장소가 없습니다. 숙소 위치를 구글 맵에서 검색하시겠습니까?')) {
-            window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('도쿠시마 ' + hotel)}`, '_blank');
-          }
-        } else {
-          alert('동선을 생성할 장소나 숙소를 먼저 추가해 주세요!');
-        }
+        window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(hotel)}`, '_blank');
         return;
       }
 
-      let origin = '';
-      let destination = '';
-      let waypointsArray = [];
-
-      if (hotel) {
-        origin = encodeURIComponent('도쿠시마 ' + hotel);
-        destination = encodeURIComponent('도쿠시마 ' + hotel);
-        waypointsArray = spots.map(s => '도쿠시마 ' + s);
-      } else {
-        origin = encodeURIComponent('도쿠시마 ' + spots[0]);
-        destination = encodeURIComponent('도쿠시마 ' + spots[spots.length - 1]);
-        if (spots.length > 2) {
-          waypointsArray = spots.slice(1, spots.length - 1).map(s => '도쿠시마 ' + s);
-        }
-      }
+      const origin = encodeURIComponent(hotel);
+      const destination = encodeURIComponent(hotel);
+      const waypointsArray = spots.filter(s => !s.includes('호텔')).map(s => '도쿠시마 ' + s);
 
       let waypointsStr = '';
       if (waypointsArray.length > 0) {
         waypointsStr = '&waypoints=' + encodeURIComponent(waypointsArray.join('|'));
       }
 
-      // 대중교통 모드(&travelmode=transit)로 구글 지도 실행
       const mapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}${waypointsStr}&travelmode=transit`;
       window.open(mapsUrl, '_blank');
     }
@@ -588,3 +583,4 @@
   </script>
 </body>
 </html>
+
