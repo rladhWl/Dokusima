@@ -70,17 +70,8 @@
           </div>
         </div>
         <div class="text-[11px] text-slate-500 mt-3 pt-2 border-t space-y-1">
-          <p>🏨 <strong>호텔 기준 반경:</strong> 도쿠시마역 도보 10분, 아와오도리 회관 도보 5분 거리 번화가 위치.</p>
+          <p>🏨 <strong>호텔 위치:</strong> 도쿠시마역 도보 10분, 아와오도리 회관 도보 5분 거리 번화가 위치.</p>
         </div>
-      </section>
-
-      <!-- 우다쓰 거리 팩트체크 안내 카드 -->
-      <section class="bg-amber-50 rounded-2xl p-4 border border-amber-200 shadow-sm text-xs space-y-1.5">
-        <h3 class="font-bold text-amber-900 flex items-center gap-1.5 text-sm">
-          <span>⚠️</span> 우다쓰 거리(うだつの町並み) 특성
-        </h3>
-        <p class="text-amber-900 leading-relaxed">• <strong>역사 풍경 보존지구:</strong> 에도시대 거상들의 목조 고택 풍경을 조용히 걷는 곳으로, 아기자기한 반지/시계 공방 쇼핑을 기대하고 가면 실망할 수 있습니다.</p>
-        <p class="text-amber-900 leading-relaxed">• <strong>쇼핑 목적이라면:</strong> 시내 중심가의 천연 쪽염색 진주(아이파루), 원목 수제 시계 공방(kiki), 도자기 주얼리 가마터를 방문하는 <strong>[3안/6안 공예 코스]</strong>를 추천합니다.</p>
       </section>
 
       <!-- 별점 가이드 기준 카드 -->
@@ -88,8 +79,8 @@
         <h3 class="font-bold text-indigo-900 flex items-center gap-1.5 text-xs">
           <span>⭐</span> 별점 평가 기준 (현지 리뷰 분석)
         </h3>
-        <p class="text-slate-700">⭐⭐⭐⭐⭐ <strong class="text-indigo-700">5점 (필수):</strong> 도쿠시마 대표 상징</p>
-        <p class="text-slate-700">⭐⭐⭐⭐☆ <strong class="text-blue-700">4점 (80% 추천):</strong> 로컬 만족도 최상</p>
+        <p class="text-slate-700">⭐⭐⭐⭐⭐ <strong class="text-indigo-700">5점 (필수):</strong> 도쿠시마 대표 원조 맛집/명소</p>
+        <p class="text-slate-700">⭐⭐⭐⭐☆ <strong class="text-blue-700">4점 (80% 추천):</strong> 로컬 단골 만족도 최상</p>
         <p class="text-slate-700">⭐⭐⭐☆☆ <strong class="text-slate-600">3점 (선택):</strong> 취향에 맞으면 방문</p>
       </section>
 
@@ -133,27 +124,27 @@
         </div>
       </section>
 
-      <!-- 5가지 서브 탭 전환: [핵심 명소] / [수제 반지·시계 공방] / [내 지도 검증 로컬스팟] / [감성 라이프 소품] / [특산품] -->
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 bg-slate-200 p-1 rounded-xl gap-1 text-[11px] md:text-xs font-bold">
+      <!-- 6가지 서브 탭 전환: [핵심 명소] / [로컬 맛집] / [수제 공방] / [내 지도 스팟] / [감성 소품] / [특산품] -->
+      <div class="grid grid-cols-3 sm:grid-cols-6 bg-slate-200 p-1 rounded-xl gap-1 text-[11px] md:text-xs font-bold">
         <button id="tabSpotsBtn" onclick="switchView('spots')" class="py-2 rounded-lg bg-white shadow-sm text-indigo-600 transition text-center">📍 핵심 명소</button>
+        <button id="tabFoodBtn" onclick="switchView('food')" class="py-2 rounded-lg text-slate-600 hover:text-slate-900 transition text-center">🍜 로컬 맛집</button>
         <button id="tabJewelryBtn" onclick="switchView('jewelry')" class="py-2 rounded-lg text-slate-600 hover:text-slate-900 transition text-center">💍 수제 공방</button>
-        <button id="tabMyMapsBtn" onclick="switchView('mymaps')" class="py-2 rounded-lg text-slate-600 hover:text-slate-900 transition text-center">🗺️ 내 지도 스팟</button>
+        <button id="tabMyMapsBtn" onclick="switchView('mymaps')" class="py-2 rounded-lg text-slate-600 hover:text-slate-900 transition text-center">🗺️ 내 지도</button>
         <button id="tabLocalCraftBtn" onclick="switchView('localCraft')" class="py-2 rounded-lg text-slate-600 hover:text-slate-900 transition text-center">🏮 감성 소품</button>
-        <button id="tabSouvenirsBtn" onclick="switchView('souvenirs')" class="py-2 rounded-lg text-slate-600 hover:text-slate-900 transition text-center">🎁 특산품 쇼핑</button>
+        <button id="tabSouvenirsBtn" onclick="switchView('souvenirs')" class="py-2 rounded-lg text-slate-600 hover:text-slate-900 transition text-center">🎁 쇼핑</button>
       </div>
 
-      <!-- 1. 추천 명소 탭 (정확한 실제 사진 매핑) -->
+      <!-- 1. 추천 명소 탭 -->
       <div id="viewSpots" class="space-y-4">
         <section class="bg-white rounded-2xl p-5 shadow-sm border-t-4 border-amber-400">
           <h2 class="text-base font-bold text-slate-700 mb-3 flex items-center gap-2">
-            <span>✨</span> 도쿠시마 추천 스팟 (실제 이미지 / 운영시간 / 요금)
+            <span>✨</span> 도쿠시마 추천 스팟 (운영시간 / 요금)
           </h2>
           
           <div class="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[520px] overflow-y-auto pr-1 pb-2">
             
-            <!-- 오츠카 국제미술관 -->
             <div class="border rounded-xl overflow-hidden bg-slate-50 flex flex-col justify-between hover:shadow-md transition">
-              <img src="https://images.unsplash.com/photo-1544967082-d9d25d867d66?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null; this.src='https://placehold.co/600x300/4f46e5/ffffff?text=Otsuka+Museum';" alt="오츠카 국제미술관 명화 갤러리" class="w-full h-32 object-cover">
+              <img src="https://images.unsplash.com/photo-1544967082-d9d25d867d66?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null; this.src='https://placehold.co/600x300/4f46e5/ffffff?text=Otsuka+Museum';" alt="오츠카 국제미술관" class="w-full h-32 object-cover">
               <div class="p-3.5 flex-1 flex flex-col justify-between">
                 <div>
                   <div class="flex justify-between items-start mb-1">
@@ -167,7 +158,7 @@
                     ⏰ 09:30 ~ 17:00 (입장 마감 16:00) | 매주 월요일 휴관
                   </div>
                   <p class="text-[11px] text-slate-700 mt-1.5 leading-relaxed">
-                    💡 <strong>왜 유명한가:</strong> 바티칸 시스티나 성당 천장화, 모나리자 등 1,000여 점 명화를 특수 도판에 원치수 그대로 복제. 사진 촬영과 만지기가 자유로움.
+                    💡 <strong>왜 유명한가:</strong> 세계 명화 1,000여 점을 특수 도판에 원치수 그대로 복제. 사진 촬영과 만지기가 자유로움.
                   </p>
                 </div>
                 <div class="mt-3 pt-2 border-t border-slate-200 flex justify-between items-center text-[11px]">
@@ -177,9 +168,8 @@
               </div>
             </div>
 
-            <!-- 나루토 우즈노미치 -->
             <div class="border rounded-xl overflow-hidden bg-slate-50 flex flex-col justify-between hover:shadow-md transition">
-              <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null; this.src='https://placehold.co/600x300/0284c7/ffffff?text=Naruto+Whirlpools';" alt="나루토 우즈노미치 소용돌이" class="w-full h-32 object-cover">
+              <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null; this.src='https://placehold.co/600x300/0284c7/ffffff?text=Naruto+Whirlpools';" alt="나루토 우즈노미치" class="w-full h-32 object-cover">
               <div class="p-3.5 flex-1 flex flex-col justify-between">
                 <div>
                   <div class="flex justify-between items-start mb-1">
@@ -193,7 +183,7 @@
                     ⏰ 09:00 ~ 18:00 (하절기 ~19:00, 마감 30분전) | 연중무휴
                   </div>
                   <p class="text-[11px] text-slate-700 mt-1.5 leading-relaxed">
-                    💡 <strong>왜 유명한가:</strong> 대교 아래 45m 유리 바닥 산책로에서 태평양과 세토내해가 만나 용솟음치는 세계 최대급 바다 회오리를 관람.
+                    💡 <strong>왜 유명한가:</strong> 대교 아래 45m 유리 바닥 산책로에서 바다 회오리를 관람.
                   </p>
                 </div>
                 <div class="mt-3 pt-2 border-t border-slate-200 flex justify-between items-center text-[11px]">
@@ -203,7 +193,6 @@
               </div>
             </div>
 
-            <!-- 아와오도리 회관 & 비잔 산 -->
             <div class="border rounded-xl overflow-hidden bg-indigo-50/50 border-indigo-100 flex flex-col justify-between hover:shadow-md transition">
               <img src="https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null; this.src='https://placehold.co/600x300/4338ca/ffffff?text=Awa+Odori+Kaikan';" alt="아와오도리 회관" class="w-full h-32 object-cover">
               <div class="p-3.5 flex-1 flex flex-col justify-between">
@@ -216,10 +205,10 @@
                     <span class="text-[11px] bg-indigo-200 text-indigo-800 font-bold px-2 py-0.5 rounded">공연+로프웨이 ¥1,800</span>
                   </div>
                   <div class="text-[11px] text-rose-600 font-semibold mt-1">
-                    ⏰ 회관 09:00 ~ 21:00 (로프웨이 야간 21:00까지 운행) | 연중무휴
+                    ⏰ 회관 09:00 ~ 21:00 (로프웨이 야간 21:00까지) | 연중무휴
                   </div>
                   <p class="text-[11px] text-slate-700 mt-1.5 leading-relaxed">
-                    💡 <strong>왜 유명한가:</strong> 400년 전통 춤 공연 감상 및 직접 춤추기 체험. 5층 로프웨이를 타고 비잔 산 정상에서 시내와 바다 야경 조망.
+                    💡 <strong>왜 유명한가:</strong> 400년 전통 춤 공연 관람 및 5층 로프웨이 비잔 산 정상 야경.
                   </p>
                 </div>
                 <div class="mt-3 pt-2 border-t border-indigo-200 flex justify-between items-center text-[11px]">
@@ -229,9 +218,8 @@
               </div>
             </div>
 
-            <!-- 미마시 우다쓰 거리 (전통 목조 고택 실제 풍경) -->
             <div class="border rounded-xl overflow-hidden bg-emerald-50/50 border-emerald-200 flex flex-col justify-between hover:shadow-md transition">
-              <img src="https://images.unsplash.com/photo-1528164344705-475426879c0d?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null; this.src='https://placehold.co/600x300/059669/ffffff?text=Udatsu+Old+Town';" alt="에도시대 전통 목조 가옥 거리" class="w-full h-32 object-cover">
+              <img src="https://images.unsplash.com/photo-1528164344705-475426879c0d?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null; this.src='https://placehold.co/600x300/059669/ffffff?text=Udatsu+Old+Town';" alt="우다쓰 거리" class="w-full h-32 object-cover">
               <div class="p-3.5 flex-1 flex flex-col justify-between">
                 <div>
                   <div class="flex justify-between items-start mb-1">
@@ -245,7 +233,7 @@
                     ⏰ 상점가 10:00 ~ 17:00 (수요일 휴무 다수) | 거리는 상시 개방
                   </div>
                   <p class="text-[11px] text-slate-700 mt-1.5 leading-relaxed">
-                    💡 <strong>왜 유명한가:</strong> 에도시대 천연 쪽(아이) 염료 대상인들이 화재 방지용 방화벽(우다쓰)을 올린 전통 목조 고택 보존 거리입니다. 고즈넉한 풍경 감상에 적합합니다.
+                    💡 <strong>왜 유명한가:</strong> 에도시대 천연 쪽 염료 대상인들의 목조 고택 보존 거리.
                   </p>
                 </div>
                 <div class="mt-3 pt-2 border-t border-emerald-200 flex justify-between items-center text-[11px]">
@@ -255,29 +243,163 @@
               </div>
             </div>
 
-            <!-- 이야기 카즈라바시 -->
-            <div class="border rounded-xl overflow-hidden bg-slate-50 flex flex-col justify-between hover:shadow-md transition">
-              <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" onerror="this.onerror=null; this.src='https://placehold.co/600x300/059669/ffffff?text=Kazurabashi+Bridge';" alt="이야 계곡 덩굴다리" class="w-full h-32 object-cover">
-              <div class="p-3.5 flex-1 flex flex-col justify-between">
-                <div>
-                  <div class="flex justify-between items-start mb-1">
-                    <div>
-                      <h3 class="font-bold text-sm text-indigo-700">이야 카즈라바시 (덩굴다리)</h3>
-                      <div class="text-xs font-bold text-amber-500">⭐⭐⭐⭐☆ <span class="text-slate-600 font-medium">(4점 / 80% 추천)</span></div>
-                    </div>
-                    <span class="text-[11px] bg-slate-200 text-slate-700 font-bold px-2 py-0.5 rounded">통행료 ¥550</span>
+          </div>
+        </section>
+      </div>
+
+      <!-- 2. 신규 추가: 도쿠시마 현지 로컬 맛집 전용 탭 -->
+      <div id="viewFood" class="hidden space-y-4">
+        <section class="bg-white rounded-2xl p-5 shadow-sm border-t-4 border-rose-500">
+          <div class="flex justify-between items-center mb-1">
+            <h2 class="text-base font-bold text-slate-800 flex items-center gap-2">
+              <span>🍜</span> 일본 현지 리뷰(타베로그) 기반 엄선 맛집 리스트
+            </h2>
+          </div>
+          <p class="text-xs text-slate-500 mb-4">광고 없이 현지인 단골 평점이 높은 <strong>원조 라멘, 토종닭 구이, 도미 요리, 수제 어묵</strong> 식당입니다.</p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[520px] overflow-y-auto pr-1 pb-2">
+            
+            <!-- 1. 이노타니 본점 -->
+            <div class="border border-rose-200 bg-rose-50/40 p-3.5 rounded-xl hover:shadow-md transition flex flex-col justify-between">
+              <div>
+                <div class="flex justify-between items-start mb-1">
+                  <div>
+                    <h3 class="font-bold text-xs text-rose-950">츄카소바 이노타니 본점 (いのたに)</h3>
+                    <div class="text-xs font-bold text-amber-500">⭐⭐⭐⭐⭐ <span class="text-slate-600 font-medium">(5점 / 라멘 원조)</span></div>
                   </div>
-                  <div class="text-[11px] text-rose-600 font-semibold mt-1">
-                    ⏰ 08:00 ~ 18:00 (하절기) | 연중무휴 (폭우 통제)
+                  <span class="text-[10px] bg-rose-200 text-rose-800 font-bold px-2 py-0.5 rounded">¥750~¥950</span>
+                </div>
+                <div class="text-[10px] text-slate-500 mb-1">🍜 <strong>주메뉴:</strong> 츄카소바(도쿠시마 라멘), 날계란 토핑, 공깃밥</div>
+                <div class="text-[11px] text-rose-600 font-semibold mt-1">
+                  ⏰ 10:30 ~ 20:00 (재료 소진 시 조기 마감) | 매주 월요일 정기휴무
+                </div>
+                <p class="text-[11px] text-slate-700 mt-1.5 leading-snug">
+                  💡 <strong>왜 유명한가:</strong> 도쿠시마 라멘의 대명사. 달콤짭조름하게 조린 돼지고기와 진한 흑갈색 돈골 간장 국물에 날계란을 풀고 밥과 함께 비벼 먹는 정통 스타일.
+                </p>
+              </div>
+              <div class="mt-3 pt-2 border-t border-rose-200 flex justify-between items-center text-[10px]">
+                <span class="text-rose-700">📍 호텔 도보 11분 (850m)</span>
+                <button onclick="addSpot('츄카소바 이노타니 본점')" class="bg-rose-600 text-white px-2 py-1 rounded hover:bg-rose-700 font-bold">+ 추가</button>
+              </div>
+            </div>
+
+            <!-- 2. 잇코 본점 -->
+            <div class="border border-rose-200 bg-rose-50/40 p-3.5 rounded-xl hover:shadow-md transition flex flex-col justify-between">
+              <div>
+                <div class="flex justify-between items-start mb-1">
+                  <div>
+                    <h3 class="font-bold text-xs text-rose-950">뼈붙은닭 잇코 본점 (骨付鳥 一鴻)</h3>
+                    <div class="text-xs font-bold text-amber-500">⭐⭐⭐⭐⭐ <span class="text-slate-600 font-medium">(5점 / 토종닭 명가)</span></div>
                   </div>
-                  <p class="text-[11px] text-slate-700 mt-1.5 leading-relaxed">
-                    💡 <strong>왜 유명한가:</strong> 일본 3대 비경 이야기 계곡에 다래 덩굴을 엮어 만든 신비로운 원시 다리. 흔들리는 발판 사이로 에메랄드빛 계곡물 조망.
-                  </p>
+                  <span class="text-[10px] bg-rose-200 text-rose-800 font-bold px-2 py-0.5 rounded">1인 약 ¥1,500~¥3,000</span>
                 </div>
-                <div class="mt-3 pt-2 border-t border-slate-200 flex justify-between items-center text-[11px]">
-                  <span class="text-indigo-600 font-medium">📍 호텔 기준 85km (JR특급+버스 1시간40분)</span>
-                  <button onclick="addSpot('이야 카즈라바시')" class="bg-indigo-600 text-white px-2.5 py-1 rounded-lg hover:bg-indigo-700 font-bold">+ 추가</button>
+                <div class="text-[10px] text-slate-500 mb-1">🍗 <strong>주메뉴:</strong> 호네츠키도리(뼈붙은 아와오도리 닭다리구이), 닭솥밥</div>
+                <div class="text-[11px] text-rose-600 font-semibold mt-1">
+                  ⏰ 17:00 ~ 23:00 (라스트오더 22:30) | 매주 화요일 휴무
                 </div>
+                <p class="text-[11px] text-slate-700 mt-1.5 leading-snug">
+                  💡 <strong>왜 유명한가:</strong> 도쿠시마 최고급 브랜드 토종닭 '아와오도리'에 특제 스파이스를 발라 겉은 바삭하고 속은 육즙 가득하게 구워낸 도쿠시마 1위 닭요리 전문점.
+                </p>
+              </div>
+              <div class="mt-3 pt-2 border-rose-200 flex justify-between items-center text-[10px]">
+                <span class="text-rose-700">📍 호텔 도보 3분 (250m)</span>
+                <button onclick="addSpot('잇코 도쿠시마본점')" class="bg-rose-600 text-white px-2 py-1 rounded hover:bg-rose-700 font-bold">+ 추가</button>
+              </div>
+            </div>
+
+            <!-- 3. 아오시마 (도미 요리) -->
+            <div class="border border-rose-200 bg-rose-50/40 p-3.5 rounded-xl hover:shadow-md transition flex flex-col justify-between">
+              <div>
+                <div class="flex justify-between items-start mb-1">
+                  <div>
+                    <h3 class="font-bold text-xs text-rose-950">아오시마 (味処 あおき) / 나루토 도미식당</h3>
+                    <div class="text-xs font-bold text-amber-500">⭐⭐⭐⭐☆ <span class="text-slate-600 font-medium">(4점 / 제철 도미)</span></div>
+                  </div>
+                  <span class="text-[10px] bg-rose-200 text-rose-800 font-bold px-2 py-0.5 rounded">정식 약 ¥1,800~¥2,800</span>
+                </div>
+                <div class="text-[10px] text-slate-500 mb-1">🐟 <strong>주메뉴:</strong> 타이메시(나루토 도미 솥밥 정식), 도미 회, 도미 지리</div>
+                <div class="text-[11px] text-rose-600 font-semibold mt-1">
+                  ⏰ 11:30 ~ 14:00, 17:30 ~ 21:00 | 매주 수요일 휴무
+                </div>
+                <p class="text-[11px] text-slate-700 mt-1.5 leading-snug">
+                  💡 <strong>왜 유명한가:</strong> 거센 나루토 소용돌이 해류 속에서 자라 육질이 유난히 탄탄하고 고소한 '나루토 도미'를 갓 지은 솥밥과 회로 즐기는 해산물 명소.
+                </p>
+              </div>
+              <div class="mt-3 pt-2 border-t border-rose-200 flex justify-between items-center text-[10px]">
+                <span class="text-rose-700">📍 나루토 공원 및 시내 방면</span>
+                <button onclick="addSpot('나루토 도미요리 식당')" class="bg-rose-600 text-white px-2 py-1 rounded hover:bg-rose-700 font-bold">+ 추가</button>
+              </div>
+            </div>
+
+            <!-- 4. 라멘 토다이 본점 -->
+            <div class="border border-rose-200 bg-rose-50/40 p-3.5 rounded-xl hover:shadow-md transition flex flex-col justify-between">
+              <div>
+                <div class="flex justify-between items-start mb-1">
+                  <div>
+                    <h3 class="font-bold text-xs text-rose-950">라멘 토다이 다이도본점 (ラーメン東大)</h3>
+                    <div class="text-xs font-bold text-amber-500">⭐⭐⭐⭐☆ <span class="text-slate-600 font-medium">(4점 / 심야 라멘)</span></div>
+                  </div>
+                  <span class="text-[10px] bg-rose-200 text-rose-800 font-bold px-2 py-0.5 rounded">¥750~¥950</span>
+                </div>
+                <div class="text-[10px] text-slate-500 mb-1">🍜 <strong>주메뉴:</strong> 돈골 간장 라멘, 교자, 날계란(무제한 무료)</div>
+                <div class="text-[11px] text-rose-600 font-semibold mt-1">
+                  ⏰ 11:00 ~ 새벽 04:00 (심야 영업) | 연중무휴
+                </div>
+                <p class="text-[11px] text-slate-700 mt-1.5 leading-snug">
+                  💡 <strong>왜 유명한가:</strong> 테이블에 놓인 신선한 날계란을 마음껏 깨 넣을 수 있는 곳으로, 야식으로 도쿠시마 현지인들이 가장 많이 찾는 라멘집.
+                </p>
+              </div>
+              <div class="mt-3 pt-2 border-t border-rose-200 flex justify-between items-center text-[10px]">
+                <span class="text-rose-700">📍 호텔 도보 6분 (500m)</span>
+                <button onclick="addSpot('라멘 토다이 다이도혼텐')" class="bg-rose-600 text-white px-2 py-1 rounded hover:bg-rose-700 font-bold">+ 추가</button>
+              </div>
+            </div>
+
+            <!-- 5. 이케조에 카마보코텐 (피시카츠) -->
+            <div class="border border-rose-200 bg-rose-50/40 p-3.5 rounded-xl hover:shadow-md transition flex flex-col justify-between">
+              <div>
+                <div class="flex justify-between items-start mb-1">
+                  <div>
+                    <h3 class="font-bold text-xs text-rose-950">이케조에 카마보코텐 (池添蒲鉾店)</h3>
+                    <div class="text-xs font-bold text-amber-500">⭐⭐⭐⭐☆ <span class="text-slate-600 font-medium">(4점 / 로컬 간식)</span></div>
+                  </div>
+                  <span class="text-[10px] bg-rose-200 text-rose-800 font-bold px-2 py-0.5 rounded">개당 ¥150~¥200</span>
+                </div>
+                <div class="text-[10px] text-slate-500 mb-1">🍢 <strong>주메뉴:</strong> 원조 피시카츠, 수제 튀김어묵</div>
+                <div class="text-[11px] text-rose-600 font-semibold mt-1">
+                  ⏰ 09:00 ~ 17:30 | 매주 수요일·일요일 휴무
+                </div>
+                <p class="text-[11px] text-slate-700 mt-1.5 leading-snug">
+                  💡 <strong>왜 유명한가:</strong> 도쿠시마 사람들의 소울푸드인 '피시카츠(생선살에 카레 가루를 넣고 튀긴 어묵)'를 80년째 수제로 갓 튀겨내는 노포.
+                </p>
+              </div>
+              <div class="mt-3 pt-2 border-t border-rose-200 flex justify-between items-center text-[10px]">
+                <span class="text-rose-700">📍 호텔 도보 7분 (신마치강 인근)</span>
+                <button onclick="addSpot('이케조에 카마보코텐')" class="bg-rose-600 text-white px-2 py-1 rounded hover:bg-rose-700 font-bold">+ 추가</button>
+              </div>
+            </div>
+
+            <!-- 6. 도쿠시마 라멘 멘오 -->
+            <div class="border border-rose-200 bg-rose-50/40 p-3.5 rounded-xl hover:shadow-md transition flex flex-col justify-between">
+              <div>
+                <div class="flex justify-between items-start mb-1">
+                  <div>
+                    <h3 class="font-bold text-xs text-rose-950">도쿠시마 라멘 멘오 역앞본점 (麺王)</h3>
+                    <div class="text-xs font-bold text-amber-500">⭐⭐⭐⭐☆ <span class="text-slate-600 font-medium">(4점 / 역앞 명소)</span></div>
+                  </div>
+                  <span class="text-[10px] bg-rose-200 text-rose-800 font-bold px-2 py-0.5 rounded">¥700~¥900</span>
+                </div>
+                <div class="text-[10px] text-slate-500 mb-1">🍜 <strong>주메뉴:</strong> 도쿠시마 라멘, 면 사리 추가(카에다마)</div>
+                <div class="text-[11px] text-rose-600 font-semibold mt-1">
+                  ⏰ 11:00 ~ 24:00 | 연중무휴
+                </div>
+                <p class="text-[11px] text-slate-700 mt-1.5 leading-snug">
+                  💡 <strong>왜 유명한가:</strong> JR 도쿠시마역 바로 앞 위치. 진하면서도 깔끔한 수프와 꼬들꼬들한 면발로 여행 전후 한 그릇 하기 최적.
+                </p>
+              </div>
+              <div class="mt-3 pt-2 border-t border-rose-200 flex justify-between items-center text-[10px]">
+                <span class="text-rose-700">📍 JR 도쿠시마역 정문 앞 (도보 9분)</span>
+                <button onclick="addSpot('도쿠시마 라멘 멘오 도쿠시마역앞점')" class="bg-rose-600 text-white px-2 py-1 rounded hover:bg-rose-700 font-bold">+ 추가</button>
               </div>
             </div>
 
@@ -285,7 +407,7 @@
         </section>
       </div>
 
-      <!-- 2. 도쿠시마 오리지널 수제 반지·시계·도자기 공방 -->
+      <!-- 3. 도쿠시마 수제 공방 탭 -->
       <div id="viewJewelry" class="hidden space-y-4">
         <section class="bg-white rounded-2xl p-5 shadow-sm border-t-4 border-indigo-600">
           <div class="flex justify-between items-center mb-1">
@@ -297,7 +419,6 @@
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[520px] overflow-y-auto pr-1 pb-2">
             
-            <!-- Jewelry Applause -->
             <div class="border border-indigo-200 bg-indigo-50/40 p-3.5 rounded-xl hover:shadow-md transition flex flex-col justify-between">
               <div>
                 <div class="flex justify-between items-start mb-1">
@@ -320,7 +441,6 @@
               </div>
             </div>
 
-            <!-- 테이블 공방 kiki -->
             <div class="border border-indigo-200 bg-indigo-50/40 p-3.5 rounded-xl hover:shadow-md transition flex flex-col justify-between">
               <div>
                 <div class="flex justify-between items-start mb-1">
@@ -343,7 +463,6 @@
               </div>
             </div>
 
-            <!-- 타무라 도예 -->
             <div class="border border-indigo-200 bg-indigo-50/40 p-3.5 rounded-xl hover:shadow-md transition flex flex-col justify-between">
               <div>
                 <div class="flex justify-between items-start mb-1">
@@ -366,7 +485,6 @@
               </div>
             </div>
 
-            <!-- AizomeBase Shinmachi -->
             <div class="border border-indigo-200 bg-indigo-50/40 p-3.5 rounded-xl hover:shadow-md transition flex flex-col justify-between">
               <div>
                 <div class="flex justify-between items-start mb-1">
@@ -393,7 +511,7 @@
         </section>
       </div>
 
-      <!-- 3. 구글 내 지도(4-1 토쿠시마) 연계 로컬 스팟 탭 -->
+      <!-- 4. 구글 내 지도 스팟 탭 -->
       <div id="viewMyMaps" class="hidden space-y-4">
         <section class="bg-white rounded-2xl p-5 shadow-sm border-t-4 border-cyan-500">
           <div class="flex justify-between items-center mb-1">
@@ -401,11 +519,10 @@
               <span>🗺️</span> 내 지도(4-1 토쿠시마) 등록 명소 검증
             </h2>
           </div>
-          <p class="text-xs text-slate-500 mb-4">내 지도에 등록된 핵심 로컬 식당 및 명소들의 <strong>최신 영업시간과 방문 팁</strong>입니다.</p>
+          <p class="text-xs text-slate-500 mb-4">내 지도에 등록된 핵심 로컬 명소들의 <strong>최신 영업시간과 방문 팁</strong>입니다.</p>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[520px] overflow-y-auto pr-1 pb-2">
             
-            <!-- 잇코 본점 -->
             <div class="border border-cyan-200 bg-cyan-50/40 p-3.5 rounded-xl hover:shadow-md transition flex flex-col justify-between">
               <div>
                 <div class="flex justify-between items-start mb-1">
@@ -413,68 +530,53 @@
                     <h3 class="font-bold text-xs text-cyan-950">잇코 도쿠시마 본점 (骨付鳥 一鴻)</h3>
                     <div class="text-xs font-bold text-amber-500">⭐⭐⭐⭐⭐ <span class="text-slate-600 font-medium">(5점 / 디너 추천)</span></div>
                   </div>
-                  <span class="text-[10px] bg-cyan-200 text-cyan-800 font-bold px-2 py-0.5 rounded">닭구이 약 ¥1,200~¥2,500</span>
+                  <span class="text-[10px] bg-cyan-200 text-cyan-800 font-bold px-2 py-0.5 rounded">약 ¥1,500~¥3,000</span>
                 </div>
-                <div class="text-[11px] text-rose-600 font-semibold mt-1">
-                  ⏰ 17:00 ~ 23:00 | 매주 화요일 정기휴무
-                </div>
-                <p class="text-[11px] text-slate-700 mt-1.5 leading-snug">
-                  💡 <strong>왜 유명한가:</strong> 도쿠시마 토종닭 '아와오도리' 겉바속촉 뼈구이 원조. 호텔에서 걸어서 3분 거리.
-                </p>
+                <div class="text-[11px] text-rose-600 font-semibold mt-1">⏰ 17:00 ~ 23:00 | 매주 화요일 휴무</div>
+                <p class="text-[11px] text-slate-700 mt-1.5 leading-snug">💡 <strong>왜 유명한가:</strong> 도쿠시마 토종닭 '아와오도리' 겉바속촉 뼈구이 원조. 호텔 도보 3분.</p>
               </div>
               <div class="mt-3 pt-2 border-t border-cyan-200 flex justify-between items-center text-[10px]">
-                <span class="text-cyan-700">📍 도쿠시마시 나카도리마치 (호텔 도보 3분)</span>
+                <span class="text-cyan-700">📍 도쿠시마시 나카도리마치</span>
                 <button onclick="addSpot('잇코 도쿠시마본점')" class="bg-cyan-600 text-white px-2 py-1 rounded hover:bg-cyan-700 font-bold">+ 추가</button>
               </div>
             </div>
 
-            <!-- 이케조에 카마보코텐 -->
             <div class="border border-cyan-200 bg-cyan-50/40 p-3.5 rounded-xl hover:shadow-md transition flex flex-col justify-between">
               <div>
                 <div class="flex justify-between items-start mb-1">
                   <div>
                     <h3 class="font-bold text-xs text-cyan-950">이케조에 카마보코텐 (池添蒲鉾店)</h3>
-                    <div class="text-xs font-bold text-amber-500">⭐⭐⭐⭐☆ <span class="text-slate-600 font-medium">(4점 / 로컬 간식 명물)</span></div>
+                    <div class="text-xs font-bold text-amber-500">⭐⭐⭐⭐☆ <span class="text-slate-600 font-medium">(4점 / 로컬 간식)</span></div>
                   </div>
-                  <span class="text-[10px] bg-cyan-200 text-cyan-800 font-bold px-2 py-0.5 rounded">피시카츠 개당 ¥150~¥200</span>
+                  <span class="text-[10px] bg-cyan-200 text-cyan-800 font-bold px-2 py-0.5 rounded">개당 ¥150~¥200</span>
                 </div>
-                <div class="text-[11px] text-rose-600 font-semibold mt-1">
-                  ⏰ 09:00 ~ 17:30 | 매주 수요일·일요일 휴무
-                </div>
-                <p class="text-[11px] text-slate-700 mt-1.5 leading-snug">
-                  💡 <strong>왜 유명한가:</strong> 도쿠시마 소울푸드인 '피시카츠(카레향 생선살 튀김 어묵)'를 갓 튀겨내는 80년 전통 수제 어묵 노포.
-                </p>
+                <div class="text-[11px] text-rose-600 font-semibold mt-1">⏰ 09:00 ~ 17:30 | 매주 수요일·일요일 휴무</div>
+                <p class="text-[11px] text-slate-700 mt-1.5 leading-snug">💡 <strong>왜 유명한가:</strong> 도쿠시마 소울푸드인 피시카츠를 80년째 갓 튀겨내는 수제 어묵 노포.</p>
               </div>
               <div class="mt-3 pt-2 border-t border-cyan-200 flex justify-between items-center text-[10px]">
-                <span class="text-cyan-700">📍 신마치 강변 인근 (호텔 도보 7분)</span>
+                <span class="text-cyan-700">📍 신마치 강변 인근 (도보 7분)</span>
                 <button onclick="addSpot('이케조에 카마보코텐')" class="bg-cyan-600 text-white px-2 py-1 rounded hover:bg-cyan-700 font-bold">+ 추가</button>
               </div>
             </div>
 
-            <!-- 라멘 토다이 -->
             <div class="border border-cyan-200 bg-cyan-50/40 p-3.5 rounded-xl hover:shadow-md transition flex flex-col justify-between">
               <div>
                 <div class="flex justify-between items-start mb-1">
                   <div>
-                    <h3 class="font-bold text-xs text-cyan-950">라멘 토다이 다이도혼텐 (ラーメン東大)</h3>
-                    <div class="text-xs font-bold text-amber-500">⭐⭐⭐⭐☆ <span class="text-slate-600 font-medium">(4점 / 날계란 무료 라멘)</span></div>
+                    <h3 class="font-bold text-xs text-cyan-950">라멘 토다이 본점 (ラーメン東大)</h3>
+                    <div class="text-xs font-bold text-amber-500">⭐⭐⭐⭐☆ <span class="text-slate-600 font-medium">(4점 / 날계란 무료)</span></div>
                   </div>
-                  <span class="text-[10px] bg-cyan-200 text-cyan-800 font-bold px-2 py-0.5 rounded">라멘 ¥750~¥950</span>
+                  <span class="text-[10px] bg-cyan-200 text-cyan-800 font-bold px-2 py-0.5 rounded">¥750~¥950</span>
                 </div>
-                <div class="text-[11px] text-rose-600 font-semibold mt-1">
-                  ⏰ 11:00 ~ 새벽 04:00 (심야 영업) | 연중무휴
-                </div>
-                <p class="text-[11px] text-slate-700 mt-1.5 leading-snug">
-                  💡 <strong>왜 유명한가:</strong> 도쿠시마 라멘계를 대표하는 체인 본점. 진한 흑갈색 간장 돈골 육수에 날계란이 무제한 무료 제공됩니다.
-                </p>
+                <div class="text-[11px] text-rose-600 font-semibold mt-1">⏰ 11:00 ~ 새벽 04:00 | 연중무휴</div>
+                <p class="text-[11px] text-slate-700 mt-1.5 leading-snug">💡 <strong>왜 유명한가:</strong> 진한 간장 돈골 육수에 날계란이 무제한 무료 제공되는 심야 라멘.</p>
               </div>
               <div class="mt-3 pt-2 border-t border-cyan-200 flex justify-between items-center text-[10px]">
-                <span class="text-cyan-700">📍 도쿠시마시 다이도 (호텔 도보 6분)</span>
+                <span class="text-cyan-700">📍 도쿠시마시 다이도 (도보 6분)</span>
                 <button onclick="addSpot('라멘 토다이 다이도혼텐')" class="bg-cyan-600 text-white px-2 py-1 rounded hover:bg-cyan-700 font-bold">+ 추가</button>
               </div>
             </div>
 
-            <!-- 도쿠시마 라멘 멘오 -->
             <div class="border border-cyan-200 bg-cyan-50/40 p-3.5 rounded-xl hover:shadow-md transition flex flex-col justify-between">
               <div>
                 <div class="flex justify-between items-start mb-1">
@@ -482,17 +584,13 @@
                     <h3 class="font-bold text-xs text-cyan-950">도쿠시마 라멘 멘오 (徳島ラーメン 麺王)</h3>
                     <div class="text-xs font-bold text-amber-500">⭐⭐⭐⭐☆ <span class="text-slate-600 font-medium">(4점 / 역 앞 라멘)</span></div>
                   </div>
-                  <span class="text-[10px] bg-cyan-200 text-cyan-800 font-bold px-2 py-0.5 rounded">라멘 ¥700~¥900</span>
+                  <span class="text-[10px] bg-cyan-200 text-cyan-800 font-bold px-2 py-0.5 rounded">¥700~¥900</span>
                 </div>
-                <div class="text-[11px] text-rose-600 font-semibold mt-1">
-                  ⏰ 11:00 ~ 24:00 | 연중무휴
-                </div>
-                <p class="text-[11px] text-slate-700 mt-1.5 leading-snug">
-                  💡 <strong>왜 유명한가:</strong> JR 도쿠시마역 바로 앞 위치. 깊은 감칠맛의 육수와 면 사리 추가(카에다마)로 유명한 단골 야식집.
-                </p>
+                <div class="text-[11px] text-rose-600 font-semibold mt-1">⏰ 11:00 ~ 24:00 | 연중무휴</div>
+                <p class="text-[11px] text-slate-700 mt-1.5 leading-snug">💡 <strong>왜 유명한가:</strong> JR 도쿠시마역 바로 앞 위치. 깊은 감칠맛의 육수와 면 추가 명소.</p>
               </div>
               <div class="mt-3 pt-2 border-t border-cyan-200 flex justify-between items-center text-[10px]">
-                <span class="text-cyan-700">📍 JR 도쿠시마역 정문 앞 (호텔 도보 9분)</span>
+                <span class="text-cyan-700">📍 JR 도쿠시마역 정문 앞 (도보 9분)</span>
                 <button onclick="addSpot('도쿠시마 라멘 멘오 도쿠시마역앞점')" class="bg-cyan-600 text-white px-2 py-1 rounded hover:bg-cyan-700 font-bold">+ 추가</button>
               </div>
             </div>
@@ -501,7 +599,7 @@
         </section>
       </div>
 
-      <!-- 4. 감성 라이프 소품 탭 -->
+      <!-- 5. 감성 라이프 소품 탭 -->
       <div id="viewLocalCraft" class="hidden space-y-4">
         <section class="bg-white rounded-2xl p-5 shadow-sm border-t-4 border-teal-500">
           <h2 class="text-base font-bold text-slate-700 mb-1 flex items-center gap-2">
@@ -511,7 +609,6 @@
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[500px] overflow-y-auto pr-1 pb-2">
             
-            <!-- nagaya. -->
             <div class="border border-teal-200 bg-teal-50/40 p-3.5 rounded-xl hover:shadow-md transition flex flex-col justify-between">
               <div>
                 <div class="flex justify-between items-start mb-1">
@@ -521,12 +618,8 @@
                   </div>
                   <span class="text-[10px] bg-teal-200 text-teal-800 font-bold px-2 py-0.5 rounded">소품 ¥1,000~¥4,000</span>
                 </div>
-                <div class="text-[11px] text-rose-600 font-semibold mt-1">
-                  ⏰ 12:00 ~ 17:00 | 매주 수요일·목요일 휴무
-                </div>
-                <p class="text-[11px] text-slate-700 mt-1.5 leading-snug">
-                  💡 <strong>왜 유명한가:</strong> 도쿠시마 현지 목공예 장인들의 수제 플레이트, 오타니야키 도자기 식기류를 정갈하게 모아둔 조용한 주택가 속 감성 갤러리 샵.
-                </p>
+                <div class="text-[11px] text-rose-600 font-semibold mt-1">⏰ 12:00 ~ 17:00 | 매주 수요일·목요일 휴무</div>
+                <p class="text-[11px] text-slate-700 mt-1.5 leading-snug">💡 <strong>왜 유명한가:</strong> 목공예 플레이트, 오타니야키 도자기 식기류를 모아둔 주택가 감성 샵.</p>
               </div>
               <div class="mt-3 pt-2 border-t border-teal-200 flex justify-between items-center text-[10px]">
                 <span class="text-teal-700">📍 호텔 앞 버스 10분 (2.2km)</span>
@@ -534,7 +627,6 @@
               </div>
             </div>
 
-            <!-- cue! -->
             <div class="border border-teal-200 bg-teal-50/40 p-3.5 rounded-xl hover:shadow-md transition flex flex-col justify-between">
               <div>
                 <div class="flex justify-between items-start mb-1">
@@ -544,20 +636,15 @@
                   </div>
                   <span class="text-[10px] bg-teal-200 text-teal-800 font-bold px-2 py-0.5 rounded">문구/잡화 ¥500~¥3,000</span>
                 </div>
-                <div class="text-[11px] text-rose-600 font-semibold mt-1">
-                  ⏰ 11:00 ~ 19:00 | 매주 수요일 휴무
-                </div>
-                <p class="text-[11px] text-slate-700 mt-1.5 leading-snug">
-                  💡 <strong>왜 유명한가:</strong> 감각적인 그래픽 문구류, 린넨 패브릭, 독특한 찻잔 등을 구경할 수 있는 현지 크리에이터들의 단골 숍.
-                </p>
+                <div class="text-[11px] text-rose-600 font-semibold mt-1">⏰ 11:00 ~ 19:00 | 매주 수요일 휴무</div>
+                <p class="text-[11px] text-slate-700 mt-1.5 leading-snug">💡 <strong>왜 유명한가:</strong> 감각적인 그래픽 문구류, 린넨 패브릭, 독특한 찻잔을 파는 크리에이터들의 단골 숍.</p>
               </div>
               <div class="mt-3 pt-2 border-t border-teal-200 flex justify-between items-center text-[10px]">
-                <span class="text-teal-700">📍 호텔 앞 버스 8분 / 도보 20분 (1.6km)</span>
+                <span class="text-teal-700">📍 호텔 앞 버스 8분 / 도보 20분</span>
                 <button onclick="addSpot('cue!')" class="bg-teal-600 text-white px-2 py-1 rounded hover:bg-teal-700 font-bold">+ 추가</button>
               </div>
             </div>
 
-            <!-- 아이노야카타 -->
             <div class="border border-teal-200 bg-teal-50/40 p-3.5 rounded-xl hover:shadow-md transition flex flex-col justify-between">
               <div>
                 <div class="flex justify-between items-start mb-1">
@@ -567,12 +654,8 @@
                   </div>
                   <span class="text-[10px] bg-teal-200 text-teal-800 font-bold px-2 py-0.5 rounded">체험비 ¥1,000~¥1,500</span>
                 </div>
-                <div class="text-[11px] text-rose-600 font-semibold mt-1">
-                  ⏰ 09:00 ~ 17:00 (체험 접수 15:30까지) | 매주 화요일 휴무
-                </div>
-                <p class="text-[11px] text-slate-700 mt-1.5 leading-snug">
-                  💡 <strong>왜 유명한가:</strong> 에도시대 거상의 대저택 보존. 천연 인디고 염료로 손수건을 직접 물들이는 20분 완성 체험과 장인의 린넨 스카프 구매 가능.
-                </p>
+                <div class="text-[11px] text-rose-600 font-semibold mt-1">⏰ 09:00 ~ 17:00 (접수 15:30까지) | 매주 화요일 휴무</div>
+                <p class="text-[11px] text-slate-700 mt-1.5 leading-snug">💡 <strong>왜 유명한가:</strong> 에도시대 거상의 대저택 보존. 천연 인디고 염료 쪽염색 손수건 20분 완성 체험.</p>
               </div>
               <div class="mt-3 pt-2 border-t border-teal-200 flex justify-between items-center text-[10px]">
                 <span class="text-teal-700">📍 도쿠시마역 2번 버스 25분 (10km)</span>
@@ -580,22 +663,17 @@
               </div>
             </div>
 
-            <!-- 니치니치 잡화점 -->
             <div class="border border-teal-200 bg-teal-50/40 p-3.5 rounded-xl hover:shadow-md transition flex flex-col justify-between">
               <div>
                 <div class="flex justify-between items-start mb-1">
                   <div>
                     <h3 class="font-bold text-xs text-teal-900">니치니치 잡화점 (나루토)</h3>
-                    <div class="text-xs font-bold text-amber-500">⭐⭐⭐☆☆ <span class="text-slate-600 font-medium">(3점 / 나루토 이동 시 추천)</span></div>
+                    <div class="text-xs font-bold text-amber-500">⭐⭐⭐☆☆ <span class="text-slate-600 font-medium">(3점 / 나루토 추천)</span></div>
                   </div>
                   <span class="text-[10px] bg-teal-200 text-teal-800 font-bold px-2 py-0.5 rounded">굿즈 ¥300~¥1,800</span>
                 </div>
-                <div class="text-[11px] text-rose-600 font-semibold mt-1">
-                  ⏰ 11:00 ~ 18:00 | 매주 일요일·월요일 휴무
-                </div>
-                <p class="text-[11px] text-slate-700 mt-1.5 leading-snug">
-                  💡 <strong>왜 유명한가:</strong> 영귤 마스킹테이프, 나루토킨토키 고구마 수제 잼, 작은 도자기 소품 등 아기자기한 지역 위트 굿즈를 취급합니다.
-                </p>
+                <div class="text-[11px] text-rose-600 font-semibold mt-1">⏰ 11:00 ~ 18:00 | 매주 일요일·월요일 휴무</div>
+                <p class="text-[11px] text-slate-700 mt-1.5 leading-snug">💡 <strong>왜 유명한가:</strong> 영귤 마스킹테이프, 고구마 수제 잼, 작은 도자기 소품 등 지역 위트 굿즈 판매.</p>
               </div>
               <div class="mt-3 pt-2 border-t border-teal-200 flex justify-between items-center text-[10px]">
                 <span class="text-teal-700">📍 JR 나루토역 도보 5분 (18km)</span>
@@ -607,7 +685,7 @@
         </section>
       </div>
 
-      <!-- 5. 특산품 & 추천 기념품 샵 탭 -->
+      <!-- 6. 특산품 & 추천 기념품 샵 탭 -->
       <div id="viewSouvenirs" class="hidden space-y-4">
         <section class="bg-white rounded-2xl p-5 shadow-sm border-t-4 border-purple-500">
           <h2 class="text-base font-bold text-slate-700 mb-3 flex items-center gap-2">
@@ -769,10 +847,10 @@
       '이케조에 카마보코텐': '池添蒲鉾店',
       '라멘 토다이 다이도혼텐': 'ラーメン東大 大道本店',
       '도쿠시마 라멘 멘오 도쿠시마역앞점': '徳島ラーメン 麺王 徳島駅前本店',
-      '우다쓰 거리': '미마시 우다쓰 거리'
+      '우다쓰 거리': '미마시 우다쓰 거리',
+      '나루토 도미요리 식당': '味処 あおき 鳴門'
     };
 
-    // 6가지 목적별 2박 3일 추천 코스 프리셋
     const PRESET_DETAILS = {
       sightseeing: {
         title: '🏛️ 1안 핵심 랜드마크 관광 코스',
@@ -785,11 +863,11 @@
         spots: ['도쿠시마 아와오도리 공항', '도쿠시마 워싱턴 호텔 플라자', '아와오도리 회관', '비잔 산 로프웨이', '잇코 도쿠시마본점', '오츠카 국제미술관', '나루토 우즈노미치', '도쿠시마 에키마에 클레멘트 플라자']
       },
       gourmet: {
-        title: '🍜 2안 도쿠시마 미식/식도락 코스',
+        title: '🍜 2안 도쿠시마 미식/식도락 코스 (로컬 맛집 집중)',
         sub: '원조 라멘(이노타니/토다이), 아와오도리 닭구이(잇코), 수제 피시카츠(이케조에)',
         items: [
           { day: '1일 차 (저녁 미식)', spot: '호텔 체크인 ➔ 이케조에 카마보코텐 (갓 튀긴 피시카츠 어묵 간식) ➔ 잇코 (아와오도리 닭구이 디너) ➔ 라멘 토다이 (야식 라멘)' },
-          { day: '2일 차 (나루토 & 라멘)', spot: '나루토 해변 도미 솥밥 ➔ 나루토 킨토키 디저트 ➔ 츄카소바 이노타니 본점 (원조 라멘)' },
+          { day: '2일 차 (나루토 & 라멘)', spot: '나루토 해변 도미 요리 식당 ➔ 나루토 킨토키 디저트 ➔ 츄카소바 이노타니 본점 (원조 라멘)' },
           { day: '3일 차 (기념품 쇼핑)', spot: '아루데요 도쿠시마 (오노노리 김 & 스다치 폰즈 구매)' }
         ],
         spots: ['도쿠시마 아와오도리 공항', '도쿠시마 워싱턴 호텔 플라자', '이케조에 카마보코텐', '잇코 도쿠시마본점', '라멘 토다이 다이도혼텐', '츄카소바 이노타니 본점', '아루데요 도쿠시마']
@@ -882,18 +960,21 @@
 
     function switchView(tab) {
       const viewSpots = document.getElementById('viewSpots');
+      const viewFood = document.getElementById('viewFood');
       const viewJewelry = document.getElementById('viewJewelry');
       const viewMyMaps = document.getElementById('viewMyMaps');
       const viewLocalCraft = document.getElementById('viewLocalCraft');
       const viewSouvenirs = document.getElementById('viewSouvenirs');
       
       const tabSpotsBtn = document.getElementById('tabSpotsBtn');
+      const tabFoodBtn = document.getElementById('tabFoodBtn');
       const tabJewelryBtn = document.getElementById('tabJewelryBtn');
       const tabMyMapsBtn = document.getElementById('tabMyMapsBtn');
       const tabLocalCraftBtn = document.getElementById('tabLocalCraftBtn');
       const tabSouvenirsBtn = document.getElementById('tabSouvenirsBtn');
 
       viewSpots.classList.add('hidden');
+      viewFood.classList.add('hidden');
       viewJewelry.classList.add('hidden');
       viewMyMaps.classList.add('hidden');
       viewLocalCraft.classList.add('hidden');
@@ -903,6 +984,7 @@
       const activeClass = 'py-2 rounded-lg bg-white shadow-sm text-indigo-600 transition text-center';
 
       tabSpotsBtn.className = inactiveClass;
+      tabFoodBtn.className = inactiveClass;
       tabJewelryBtn.className = inactiveClass;
       tabMyMapsBtn.className = inactiveClass;
       tabLocalCraftBtn.className = inactiveClass;
@@ -911,6 +993,9 @@
       if (tab === 'spots') {
         viewSpots.classList.remove('hidden');
         tabSpotsBtn.className = activeClass;
+      } else if (tab === 'food') {
+        viewFood.classList.remove('hidden');
+        tabFoodBtn.className = activeClass;
       } else if (tab === 'jewelry') {
         viewJewelry.classList.remove('hidden');
         tabJewelryBtn.className = activeClass;
